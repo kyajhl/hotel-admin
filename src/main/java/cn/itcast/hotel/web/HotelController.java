@@ -40,7 +40,7 @@ public class HotelController {
     public void saveHotel(@RequestBody Hotel hotel){
         // 新增酒店
         hotelService.save(hotel);
-        // 发送MQ消息
+        // 发送 MQ 消息
         rabbitTemplate.convertAndSend(HotelMqConstants.EXCHANGE_NAME, HotelMqConstants.INSERT_KEY, hotel.getId());
     }
 
@@ -51,7 +51,7 @@ public class HotelController {
         }
         hotelService.updateById(hotel);
 
-        // 发送MQ消息
+        // 发送 MQ 消息
         rabbitTemplate.convertAndSend(HotelMqConstants.EXCHANGE_NAME, HotelMqConstants.INSERT_KEY, hotel.getId());
     }
 
@@ -59,7 +59,7 @@ public class HotelController {
     public void deleteById(@PathVariable("id") Long id) {
         hotelService.removeById(id);
 
-        // 发送MQ消息
+        // 发送 MQ 消息
         rabbitTemplate.convertAndSend(HotelMqConstants.EXCHANGE_NAME, HotelMqConstants.DELETE_KEY, id);
     }
 }
